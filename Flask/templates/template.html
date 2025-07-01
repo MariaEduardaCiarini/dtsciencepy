@@ -3,8 +3,11 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Joguinhos</title>
+    <title>Jogos</title>
     <link rel="stylesheet" href="{{ url_for('static', filename='bootstrap.css') }}">
+    <link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+
+    <link rel="icon" type="image/png" href="{{ url_for('static', filename='controle.png') }}">
 </head>
 <body>
 <div class="container">
@@ -24,6 +27,10 @@
     </div>
 
     {% block conteudo %}{% endblock %}
+
+    <script type="text/javascript" src="{{ url_for ('static', filename='jquery.js') }}"></script>
+    <script type="text/javascript" src="{{ url_for ('static', filename='app.js') }}"></script>
+
 
 </div>
 </body>
