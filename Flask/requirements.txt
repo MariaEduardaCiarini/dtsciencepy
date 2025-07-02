@@ -1,0 +1,8 @@
+Flask
+Flask-WTF
+Flask-SQLAlchemy
+WTForms
+PyMySQL
+pycurl
+mysql-connector-python
+nbformat

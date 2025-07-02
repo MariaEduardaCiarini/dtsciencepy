@@ -4,7 +4,7 @@ from nbformat.validator import validators
 from wtforms import StringField, SubmitField, PasswordField
 from wtforms.validators import DataRequired, Length
 
-from Flask.principal import app
+from principal import app
 from flask_wtf import FlaskForm
 
 

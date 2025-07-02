@@ -1,16 +1,7 @@
-from pycurl import UPLOAD
-import os
-
-SECRET_KEY = 'FC3M1'
-
-SGBD = 'mysql+mysqlconnector'
+SGBD = 'mysql+mysqlconnector'  # Ou 'mysql+pymysql' se for usar pymysql
 usuario = 'root'
 senha = '1234567'
-servidor = 'localhost'
+servidor = 'db'  # nome do serviço do MySQL no docker-compose
 database = 'games'
 
 SQLALCHEMY_DATABASE_URI = f'{SGBD}://{usuario}:{senha}@{servidor}/{database}'
-SQLALCHEMY_TRACK_MODIFICATIONS = False
-
-
-UPLOAD_PATH = os.path.dirname(os.path.abspath(__file__)) + '/uploads'
