@@ -1,33 +1,109 @@
 {% extends "template.html" %}
 {% block conteudo %}
+
+<link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
+
+<style>
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .form-control {
+        background-color: #1e1e1e;
+        color: #fff;
+        border-color: #555;
+    }
+
+    .form-control:focus {
+        border-color: #888;
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    .btn-primary,
+    .btn-danger {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-primary:hover,
+    .btn-danger:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+    label {
+        color: #bbb;
+    }
+
+    .fileContainer {
+        display: block;
+        margin-top: 10px;
+        cursor: pointer;
+    }
+
+    form {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 24px;
+        margin-top: 20px;
+    }
+
+    figure {
+        width: auto;
+        text-align: center;
+    }
+
+    figure img {
+        max-width: 220px;
+        height: auto;
+        border-radius: 8px;
+    }
+
+    fieldset {
+        flex: 1;
+        min-width: 260px;
+        border: none;
+    }
+
+    .form-group {
+        margin-bottom: 16px;
+    }
+</style>
+
 <form action="{{ url_for('criar') }}" method="post" enctype="multipart/form-data">
 
-    <figure class="img-thumbnail col-4">
-        <img class="img-fluid" src="{{ url_for('imagem, nome_arquivo='interrogação.jpg') }}">
+    <figure class="img-thumbnail bg-dark p-3">
+        <img src="{{ url_for('imagem', nome_arquivo='interrogação.jpg') }}" alt="Capa padrão">
         <figcaption>
             <label class="fileContainer">
                 Mudar capa
-                <input type="file" name="arquivo" accept=".jpg">
-
+                <input type="file" name="arquivo" accept=".jpg" hidden>
             </label>
         </figcaption>
     </figure>
 
-
     <fieldset>
+        {{ form.csrf_token() }}
+
         <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" class="form-control">
+            {{ form.nome.label(class="form-label") }}
+            {{ form.nome(class="form-control") }}
         </div>
         <div class="form-group">
-            <label for="categoria">Categoria</label>
-            <input type="text" id="categoria" name="categoria" class="form-control">
+            {{ form.categoria.label(class="form-label") }}
+            {{ form.categoria(class="form-control") }}
         </div>
         <div class="form-group">
-            <label for="console">Console</label>
-            <input type="text" id="console" name="console" class="form-control">
+            {{ form.console.label(class="form-label") }}
+            {{ form.console(class="form-control") }}
         </div>
-        <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+        <div class="form-group">
+            {{ form.salvar(class="btn btn-primary me-2") }}
+            <a class="btn btn-danger" href="{{ url_for('index') }}">Voltar</a>
+        </div>
     </fieldset>
 </form>
+
 {% endblock %}

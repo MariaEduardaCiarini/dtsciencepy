@@ -1,34 +1,84 @@
 {% extends "template.html" %}
 {% block conteudo %}
-<form action="{{ url_for('atualizar') }}" method="post" enctype="multipart/form-data">
+<link rel="stylesheet" href="{{ url_for('static', filename='app.css') }}">
 
-    <figure class="img-thumbnail col-4">
-        <img class="img-fluid" src="{{ url_for('imagem', nome_arquivo=capa_jogo) }}">
+<!-- Estilo inline para fundo preto e botões cinzas -->
+<style>
+    body {
+        background-color: #000;
+        color: #fff;
+    }
+
+    .form-control {
+        background-color: #1e1e1e;
+        color: #fff;
+        border-color: #555;
+    }
+
+    .form-control:focus {
+        border-color: #888;
+        background-color: #1e1e1e;
+        color: #fff;
+    }
+
+    .btn-primary {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-primary:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+    .btn-danger {
+        background-color: #6c757d;
+        border-color: #6c757d;
+    }
+
+    .btn-danger:hover {
+        background-color: #5a6268;
+        border-color: #545b62;
+    }
+
+    label {
+        color: #bbb;
+    }
+</style>
+
+<form class="d-flex flex-wrap gap-4 mt-4" action="{{ url_for('atualizar') }}" method="post"
+      enctype="multipart/form-data">
+
+    <figure class="img-thumbnail bg-dark text-center col-12 col-md-4 p-3">
+        <img class="img-fluid rounded mb-2" src="{{ url_for('imagem', nome_arquivo=capa_jogo) }}" alt="Capa do jogo">
         <figcaption>
-            <label class="fileContainer">
+            <label class="form-label text-light" style="cursor: pointer;">
                 Mudar capa
-                <input type="file" name="arquivo" accept=".jpg">
-
+                <input type="file" name="arquivo" accept=".jpg" hidden>
             </label>
         </figcaption>
     </figure>
 
-    <fieldset>
-        <input type="hidden" name="id" value="{{ jogo.id }}">
+    <fieldset class="flex-fill col-12 col-md-7">
+        <input type="hidden" name="id" value="{{ id }}">
+        {{ form.csrf_token() }}
 
-        <div class="form-group">
-            <label for="nome">Nome</label>
-            <input type="text" id="nome" name="nome" class="form-control" value="{{ jogo.nome }}">
+        <div class="mb-3">
+            {{ form.nome.label(class="form-label") }}
+            {{ form.nome(class="form-control") }}
         </div>
-        <div class="form-group">
-            <label for="categoria">Categoria</label>
-            <input type="text" id="categoria" name="categoria" class="form-control" value="{{ jogo.categoria }}">
+        <div class="mb-3">
+            {{ form.categoria.label(class="form-label") }}
+            {{ form.categoria(class="form-control") }}
         </div>
-        <div class="form-group">
-            <label for="console">Console</label>
-            <input type="text" id="console" name="console" class="form-control" value="{{ jogo.console }}">
+        <div class="mb-3">
+            {{ form.console.label(class="form-label") }}
+            {{ form.console(class="form-control") }}
         </div>
-        <button type="submit" class="btn btn-primary btn-salvar">Salvar</button>
+
+        <button type="submit" class="btn btn-primary me-2">Salvar</button>
+        <a class="btn btn-danger" href="{{ url_for('index') }}">Voltar</a>
     </fieldset>
 </form>
+
 {% endblock %}
